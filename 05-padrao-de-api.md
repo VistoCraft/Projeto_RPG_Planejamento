@@ -23,7 +23,7 @@ Contrato entre o `Projeto_RPG` (frontend) e o `Projeto_RPG_Backend`.
 | Tabuleiro | `GET /mesas/{id}/tabuleiro`, `PUT /mesas/{id}/tabuleiro` |
 
 - `GET /mesas` lista as mesas públicas e as que o usuário participa. Filtros na query: `?busca=`, `?templateId=`, `?status=`, `?minhas=true`.
-- Status: `200` leitura e edição com corpo, `201` criação (com `Location`), `204` sem corpo, `400` validação, `401` sem login, `403` sem permissão, `404` não existe ou é privado, `409` conflito (mesa cheia, edição concorrente).
+- Status: `200` leitura e edição com corpo, `201` criação (com `Location`), `204` sem corpo, `400` validação, `401` sem login, `403` sem permissão, `404` não existe ou é privado, `409` conflito (mesa encerrada, entrada bloqueada, dono tentando sair).
 
 ## Paginação
 
@@ -43,7 +43,7 @@ Todo erro sai como **Problem Details** (RFC 9457, `application/problem+json`), o
 }
 ```
 
-- **Validação (400) e conflito (409):** a chave de `errors` é um **código** em `PascalCase` (`NomeObrigatorio`, `MesaCheia`, `CodigoConviteInvalido`). O frontend traduz o código para a mensagem na tela, como já faz com os códigos do Identity (`DuplicateEmail`).
+- **Validação (400) e conflito (409):** a chave de `errors` é um **código** em `PascalCase` (`NomeObrigatorio`, `EntradaBloqueada`, `CodigoConviteInvalido`). O frontend traduz o código para a mensagem na tela, como já faz com os códigos do Identity (`DuplicateEmail`).
 - **401, 403 e 404:** sem `errors`, só `status` e `title`.
 - **500:** mensagem genérica; o detalhe fica só no log do servidor.
 
@@ -53,6 +53,7 @@ Todo erro sai como **Problem Details** (RFC 9457, `application/problem+json`), o
 - **CRUD fica no REST.** Pelo hub vão só as ações de jogo de alta frequência: `EnviarMensagem`, `Rolar`, `MoverToken`.
 - Eventos do servidor para o grupo, no passado: `MensagemRecebida`, `TokenMovido`, `FichaAtualizada`, `ParticipanteEntrou`, `ParticipanteSaiu`, `PresencaAlterada`.
 - Mudança feita pelo REST que outros precisam ver (ex.: ficha salva) também emite o evento no grupo.
+- **Ficha em edição simultânea:** o cliente envia só os campos alterados (`PATCH /mesas/{id}/fichas/{fichaId}` com `{ campos: { caminho: valor } }`), agrupados com espera curta (~400 ms). O servidor grava campo a campo (vale a última gravação de cada campo) e emite `FichaAtualizada` com os mesmos campos, só para quem pode ver a ficha. Quem recebe aplica os campos, menos o campo que estiver editando naquele momento.
 
 ## Organização no backend
 

@@ -30,6 +30,10 @@ Quando uma dúvida for respondida, escreva a resposta e a data embaixo dela e at
   - **Ainda em aberto:** o que exatamente o ajudante pode fazer (hoje: gerenciar entrada, código, jogadores e espectadores; não encerra, não exclui, não nomeia ajudantes)?
 - **Rolagens:** o resultado é público para a mesa toda? O mestre pode rolar escondido?
 - **Tabuleiro:** é obrigatório em toda mesa ou opcional?
+- **Fichas de outros jogadores:** um jogador vê a ficha dos outros?
+  - **Resposta (2026-11-09):** o mestre define, ficha por ficha, se os outros jogadores conseguem ver aquela ficha.
+- **Edição ao mesmo tempo:** duas pessoas editando a mesma ficha.
+  - **Resposta (2026-11-09):** vale a última gravação, mas as mudanças chegam em tempo real (SignalR) para quem está com a ficha aberta, de forma leve: só os campos alterados, com espera curta entre envios.
 - **Fichas fora de mesa:** um jogador pode ter uma ficha sem estar numa mesa?
   - **Resposta (2026-11-09):** a ficha vive na mesa, mas o jogador pode salvá-la na própria biblioteca, para não perdê-la se a mesa for excluída ou para usar o mesmo personagem em outra mesa com o mesmo template.
   - **Resposta (2026-11-09):** salvar é manual e também automático na exclusão da mesa; a cópia é independente. Só o mestre cria fichas e atribui uma ou mais a um jogador, que edita e salva as suas. Há fichas simplificadas para pets e NPCs do jogador.

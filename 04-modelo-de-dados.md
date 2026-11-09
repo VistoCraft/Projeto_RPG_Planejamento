@@ -93,7 +93,8 @@ O mestre é o participante com papel `Dono` (não há `MestreId` na mesa, para n
 | `NomePersonagem` | texto | Para listar sem abrir o JSON |
 | `Dados` | jsonb | Valores da ficha, no formato do `ModeloFicha` (ou do `ModeloFichaSimplificada`) da mesa |
 | `VersaoModelo` | int | Versão do `ModeloFicha` da mesa em que os `Dados` estão |
-| `AtualizadaEm` | data | Usada para detectar edição concorrente |
+| `VisivelParaJogadores` | bool | Definido pelo mestre: se os outros jogadores da mesa podem ver esta ficha (só leitura) |
+| `AtualizadaEm` | data | Última gravação; em edição simultânea, vale a última |
 
 - `Dados` em `jsonb` porque cada mesa tem campos diferentes. O backend valida os dados contra o `ModeloFicha` da mesa.
 - **Só o mestre cria fichas.** Ele atribui uma ou mais a um jogador, que pode editar e salvar as suas. Um jogador pode ter várias fichas na mesma mesa.
@@ -180,7 +181,9 @@ Um por mesa (1:1) por enquanto.
 | Sair da mesa | Qualquer participante, menos o dono |
 | Criar e editar template custom | Qualquer usuário logado, na própria área de templates |
 | Criar ficha, atribuir ficha a jogador | Dono ou ajudante |
+| Ver ficha | Mestre, ajudante e o jogador da ficha; os outros jogadores só se `VisivelParaJogadores` estiver ligado |
 | Editar e salvar ficha | Jogador a quem ela foi atribuída, ou mestre |
+| Mudar a visibilidade da ficha para os outros jogadores | Dono ou ajudante |
 | Salvar ficha na biblioteca; propor ficha da biblioteca para uma mesa | Jogador a quem ela foi atribuída / dono da cópia |
 | Aceitar ou recusar proposta de ficha | Mestre |
 | Ver backups de uma ficha | Mestre e o jogador da ficha |

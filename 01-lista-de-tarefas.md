@@ -74,6 +74,8 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [ ] Salvar a ficha no backend no lugar do `localStorage`
 - [ ] Listar as fichas da mesa
 - [ ] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele
+- [ ] Mestre define, por ficha, se os outros jogadores podem ver aquela ficha
+- [ ] Base do SignalR (hub da mesa, grupo por mesa) e ficha sincronizada em tempo real, enviando só os campos alterados
 - [ ] Na ficha nova: valor máximo editável nas barras, modos "ver" / "editar", favoritar perícias, tabela de combate editável
 - [ ] Layout responsivo da ficha (hoje tem largura fixa de 940px)
 
