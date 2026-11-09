@@ -6,26 +6,31 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 
 - [x] Responder as perguntas de [02-duvidas-em-aberto.md](02-duvidas-em-aberto.md) que bloqueiam o backend (stack, banco, tempo real)
 - [x] Escolher a stack do backend e iniciar o `Projeto_RPG_Backend`
-- [ ] Definir o modelo de dados: usuário, mesa, participante, mensagem, ficha, tabuleiro, token
+- [x] Definir o modelo de dados: usuário, sistema, mesa, participante, mensagem, ficha, tabuleiro, token ([04-modelo-de-dados.md](04-modelo-de-dados.md))
 - [x] Configurar banco de dados e migrations (PostgreSQL 18 local, senha no User Secrets, migration `Inicial` aplicada)
-- [ ] Definir o padrão de API (REST, tempo real) e o formato de erros
-- [ ] Configurar variáveis de ambiente (`.env.example`) nos dois projetos
-- [ ] Configurar lint, formatação e `yarn build` / testes no CI
+- [x] Definir o padrão de API (REST, tempo real) e o formato de erros ([05-padrao-de-api.md](05-padrao-de-api.md); Problem Details já ligado no backend)
+- [x] Configurar variáveis de ambiente (`.env.example`) nos dois projetos
+- [x] CI com `yarn build` (frontend) e `dotnet build` (backend) no GitHub Actions
+- [ ] Lint e formatação (ESLint/Prettier no frontend, `dotnet format` no backend) e testes no CI
 - [x] Aplicar a [identidade visual](03-identidade-visual.md) no frontend (tokens no `@theme`, fontes, tema claro e escuro)
 
 ## 2. Contas e login
 
-- [x] Cadastro de usuário (tela `/cadastro` + `/auth/register`; ainda sem o nome)
+- [x] Cadastro de usuário (tela `/cadastro` + `/auth/register`)
+- [ ] Cadastro com perfil: nickname (único), país e data de nascimento (18+) obrigatórios; como conheceu opcional
 - [ ] Login e logout (login pronto na tela `/login`; falta o logout)
 - [x] Sessão / token de autenticação (cookie do Identity)
-- [ ] Login com Google
+- [ ] Login com Google, com etapa para completar o perfil (país, nickname, idade, como conheceu)
 - [ ] Login com Discord
-- [ ] Proteger as rotas do frontend que exigem login
-- [ ] Página de perfil (nome e avatar)
+- [ ] Exigir login só nas ações (criar mesa, entrar, abrir mesa, fichas); visitante navega como mostruário
+- [ ] Política de privacidade e termos aceitos no cadastro (LGPD)
+- [ ] Página de perfil (editar dados e avatar)
 
 ## 3. Hub e lista de mesas
 
 - [x] Rota do hub no frontend (hub em `/`, ficha em `/ficha`)
+- [ ] Home do produto em `/`; o hub vai para `/mesas`
+- [ ] Hub aberto a visitantes: veem mesas públicas e templates padrão; o resto pede login
 - [ ] API: listar mesas
 - [ ] Listagem de mesas com nome, mestre, sistema, número de jogadores e status
 - [ ] Busca e filtro de mesas
@@ -52,17 +57,20 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 
 ## 6. Fichas
 
-- [ ] Ligar a ficha atual a uma mesa e a um participante
+- [ ] Refazer a ficha do zero (a atual era um teste), montada a partir do modelo (`ModeloFicha`)
+- [ ] Ligar a ficha a uma mesa e a um participante
+- [ ] Template padrão 5e com o conteúdo do SRD 5.1 (CC-BY-4.0, com atribuição)
+- [ ] Ficha simplificada para pets e NPCs do jogador, com modelo próprio em cada template
+- [ ] Mestre cria fichas e atribui uma ou mais a cada jogador
+- [ ] Fórmula de rolagem por atributo cadastrada no template, com o resultado enviado ao chat
+- [ ] Biblioteca do jogador: salvar cópia da ficha (manual e automático ao excluir a mesa)
+- [ ] Jogador propõe ficha da biblioteca para uma mesa; mestre aceita ou recusa
+- [ ] Mestre altera o modelo da ficha da mesa, com backup das fichas e conversão de campos antigos para novos
+- [ ] Área de templates do usuário, com editor de template custom
 - [ ] Salvar a ficha no backend no lugar do `localStorage`
 - [ ] Listar as fichas da mesa
-- [ ] Mestre vê e edita todas as fichas; jogador edita só a própria
-- [ ] Terminar o que está pendente na ficha (ver `Projeto_RPG/ai/07-pendencias.md`):
-  - [ ] Salvar atributos, perícias, condições e combate
-  - [ ] Valor máximo editável nas barras de Vida, Sanidade e Esforço
-  - [ ] Botão de rolagem (d20) dos atributos, com o resultado enviado ao chat
-  - [ ] Botões "ver" / "editar" das seções
-  - [ ] Favoritar perícias
-  - [ ] Tabela de combate editável (adicionar e remover armas)
+- [ ] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele
+- [ ] Na ficha nova: valor máximo editável nas barras, modos "ver" / "editar", favoritar perícias, tabela de combate editável
 - [ ] Layout responsivo da ficha (hoje tem largura fixa de 940px)
 
 ## 7. Tabuleiro
@@ -83,3 +91,8 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [ ] Deploy do backend e do banco
 - [ ] Domínio e HTTPS
 - [ ] Monitoramento de erros
+
+## 9. Depois do lançamento
+
+- [ ] Template Ordem Paranormal (após verificar a licença)
+- [ ] Aba no hub para compartilhar templates prontos

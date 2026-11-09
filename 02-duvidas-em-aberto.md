@@ -16,11 +16,26 @@ Quando uma dúvida for respondida, escreva a resposta e a data embaixo dela e at
 ## Produto
 
 - **Sistema de RPG:** a ficha é de um sistema só (a atual tem Sanidade e Exposição Paranormal) ou cada mesa escolhe o sistema?
+  - **Resposta (2026-11-09):** cada mesa tem o seu sistema. O sistema define o modelo da ficha (ver [04-modelo-de-dados.md](04-modelo-de-dados.md)).
+  - **Resposta (2026-11-09):** os dois. Haverá templates de ficha padrão (D&D 5e e Ordem Paranormal) e fichas custom criadas pelo mestre. Dentro de uma mesa o mestre pode alterar a ficha padrão, mas o template original não muda.
+  - **Resposta (2026-11-09):** a ficha atual era um teste e será refeita do zero. O lançamento terá só o template 5e, feito com o conteúdo de licença aberta (SRD 5.1), e a criação de ficha própria; Ordem Paranormal fica para depois. A rolagem de cada atributo é uma fórmula cadastrada no template. As colunas "nun." da tabela de combate ficam de fora por enquanto.
+  - **Resposta (2026-11-09):** quando o mestre altera o modelo da mesa, cada ficha ganha um backup e a ficha ativa é convertida, com o mestre indicando como os campos antigos viram os novos. Templates custom ficam numa área de templates do usuário; depois, poderão ser compartilhados numa aba do hub.
 - **Mesas públicas ou privadas:** qualquer um vê a lista de mesas, ou só as mesas em que participa?
+  - **Resposta (2026-11-09):** o mestre escolhe. Mesa pública aparece no hub para todos e qualquer usuário logado entra; mesa privada só aparece para os participantes e se entra pelo código de convite.
 - **Limite de jogadores** por mesa?
 - **Rolagens:** o resultado é público para a mesa toda? O mestre pode rolar escondido?
 - **Tabuleiro:** é obrigatório em toda mesa ou opcional?
 - **Fichas fora de mesa:** um jogador pode ter uma ficha sem estar numa mesa?
+  - **Resposta (2026-11-09):** a ficha vive na mesa, mas o jogador pode salvá-la na própria biblioteca, para não perdê-la se a mesa for excluída ou para usar o mesmo personagem em outra mesa com o mesmo template.
+  - **Resposta (2026-11-09):** salvar é manual e também automático na exclusão da mesa; a cópia é independente. Só o mestre cria fichas e atribui uma ou mais a um jogador, que edita e salva as suas. Há fichas simplificadas para pets e NPCs do jogador.
+  - **Resposta (2026-11-09):** para levar uma ficha da biblioteca a outra mesa, o jogador propõe e o mestre aceita. Cada template define também o modelo da ficha simplificada.
+
+- **Hub para visitantes:** quem não está logado vê o hub?
+  - **Resposta (2026-11-09):** sim, com limitações, como mostruário. Uma home em `/` apresenta o produto.
+  - **Resposta (2026-11-09):** o visitante vê a lista de mesas públicas e os templates padrão; criar mesa, entrar, abrir mesa e chat pedem login. O hub fica em `/mesas`.
+- **Dados do cadastro:** o que se pede ao criar a conta?
+  - **Resposta (2026-11-09):** o perfil é preenchido no cadastro. No login pelo Google, uma etapa extra pede país, nickname, idade e como conheceu o site.
+  - **Resposta (2026-11-09):** idade mínima de 18 anos por enquanto, por segurança. Nickname (único), país e data de nascimento são obrigatórios; só "como conheceu" é opcional.
 
 - **Nome do site:** a referência visual usa "Arcana RPG" só como exemplo. Qual será o nome?
 

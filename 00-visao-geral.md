@@ -7,17 +7,19 @@ Um site para jogar RPG de mesa online. Os jogadores entram num **hub**, escolhem
 ## Estrutura do site
 
 ```
-Hub
-└─ Lista de mesas
-   └─ Mesa
-      ├─ Chat
-      ├─ Fichas
-      └─ Tabuleiro
+Home
+└─ Hub
+   └─ Lista de mesas
+      └─ Mesa
+         ├─ Chat
+         ├─ Fichas
+         └─ Tabuleiro
 ```
 
 | Tela / área | O que faz |
 | --- | --- |
-| **Hub** | Página inicial depois do login. Mostra a lista de mesas e permite criar uma mesa ou entrar em uma. |
+| **Home** | Página principal (`/`). Apresenta o produto e leva ao cadastro e ao hub. |
+| **Hub** | Lista de mesas públicas. Aberto a visitantes como mostruário, com limitações; quem está logado cria mesa e entra. |
 | **Lista de mesas** | Cada item mostra nome, mestre, sistema, número de jogadores e status (aberta, em sessão, encerrada). |
 | **Mesa** | Espaço de uma campanha. Reúne o chat, as fichas e o tabuleiro dos participantes. |
 | **Chat** | Mensagens em tempo real entre os participantes da mesa, incluindo resultados de rolagens de dados. |
@@ -29,10 +31,11 @@ Hub
 | Entidade | Descrição |
 | --- | --- |
 | Usuário | Pessoa com conta no site. Pode ser mestre em uma mesa e jogador em outra. |
-| Mesa | Campanha com nome, sistema, mestre e participantes. |
+| Template | Modelo de ficha (atributos, perícias, barras, condições, fórmulas de rolagem): padrão do site (5e, pelo SRD 5.1) ou custom, na área de templates do usuário. A mesa copia o template e o mestre pode alterar a cópia. |
+| Mesa | Campanha com nome, sistema, mestre, participantes e visibilidade (pública ou privada). |
 | Participante | Ligação entre usuário e mesa, com papel (`mestre` ou `jogador`). |
 | Mensagem | Item do chat de uma mesa: texto ou resultado de rolagem. |
-| Ficha | Personagem de um participante numa mesa (detalhes, status, atributos, perícias, combate). |
+| Ficha | Personagem numa mesa, no modelo da mesa: completa ou simplificada (pets e NPCs). O mestre cria e atribui a um jogador, que edita e pode salvar uma cópia na própria biblioteca. |
 | Tabuleiro | Mapa de uma mesa: imagem de fundo, grade e tokens. |
 | Token | Peça no tabuleiro, ligada ou não a uma ficha, com posição (x, y). |
 
