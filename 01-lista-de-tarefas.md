@@ -17,20 +17,22 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 ## 2. Contas e login
 
 - [x] Cadastro de usuário (tela `/cadastro` + `/auth/register`)
-- [ ] Cadastro com perfil: nickname (único), país e data de nascimento (18+) obrigatórios; como conheceu opcional
-- [ ] Login e logout (login pronto na tela `/login`; falta o logout)
+- [x] Cadastro com perfil: nickname (único), país e data de nascimento (18+) obrigatórios; como conheceu opcional (`POST /auth/cadastro`)
+- [x] Login e logout (`POST /auth/sair`; nickname e botão Sair no cabeçalho)
 - [x] Sessão / token de autenticação (cookie do Identity)
 - [ ] Login com Google, com etapa para completar o perfil (país, nickname, idade, como conheceu)
 - [ ] Login com Discord
-- [ ] Exigir login só nas ações (criar mesa, entrar, abrir mesa, fichas); visitante navega como mostruário
-- [ ] Política de privacidade e termos aceitos no cadastro (LGPD)
+- [x] Visitante navega pela home e pelo hub como mostruário (sessão conferida por `GET /perfil`)
+- [ ] Exigir login nas ações (criar mesa, entrar, abrir mesa, fichas), conforme elas forem criadas
+- [x] Política de privacidade e termos aceitos no cadastro (LGPD), com versão e data do aceite
+- [ ] Tela de exclusão de conta (hoje o pedido é por e-mail)
 - [ ] Página de perfil (editar dados e avatar)
 
 ## 3. Hub e lista de mesas
 
 - [x] Rota do hub no frontend (hub em `/`, ficha em `/ficha`)
-- [ ] Home do produto em `/`; o hub vai para `/mesas`
-- [ ] Hub aberto a visitantes: veem mesas públicas e templates padrão; o resto pede login
+- [x] Home do produto em `/`; o hub vai para `/mesas`
+- [x] Hub aberto a visitantes, com aviso para criar conta
 - [ ] API: listar mesas
 - [ ] Listagem de mesas com nome, mestre, sistema, número de jogadores e status
 - [ ] Busca e filtro de mesas

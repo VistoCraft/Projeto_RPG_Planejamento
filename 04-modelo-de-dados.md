@@ -28,7 +28,10 @@ Token     N──1 Ficha (opcional)
 | `Pais` | texto | Código ISO do país; obrigatório |
 | `DataNascimento` | data | No lugar da idade, que muda com o tempo; obrigatória, mínimo de 18 anos |
 | `ComoConheceu` | texto? | Opção de uma lista ou texto livre; o único campo opcional |
+| `VersaoTermosAceita`, `TermosAceitosEm` | texto?, data? | Versão dos termos aceita no cadastro e quando |
 | `PerfilCompleto` | bool | `false` depois do login pelo Google, até a etapa de perfil ser preenchida |
+
+No banco, os campos do perfil aceitam nulo (contas antigas e a etapa do Google); a obrigatoriedade é validada no `POST /auth/cadastro`.
 | `AvatarUrl` | texto? | Entra com o upload de imagens |
 
 ### Template
