@@ -20,5 +20,6 @@ Planejamento do site de RPG de mesa online.
 | [03-identidade-visual.md](03-identidade-visual.md) | Paleta, tipografia, marca e componentes-base (claro e escuro) |
 | [04-modelo-de-dados.md](04-modelo-de-dados.md) | Entidades, campos, relações e regras de acesso |
 | [05-padrao-de-api.md](05-padrao-de-api.md) | Rotas REST, paginação, formato de erros e SignalR |
+| [06-modelo-de-ficha.md](06-modelo-de-ficha.md) | Formato do modelo de ficha, fórmulas de rolagem e dados da ficha |
 
 Os arquivos seguem o padrão `NN-nome-em-kebab-case.md`.

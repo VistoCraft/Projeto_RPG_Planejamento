@@ -11,7 +11,8 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [x] Definir o padrão de API (REST, tempo real) e o formato de erros ([05-padrao-de-api.md](05-padrao-de-api.md); Problem Details já ligado no backend)
 - [x] Configurar variáveis de ambiente (`.env.example`) nos dois projetos
 - [x] CI com `yarn build` (frontend) e `dotnet build` (backend) no GitHub Actions
-- [ ] Lint e formatação (ESLint/Prettier no frontend, `dotnet format` no backend) e testes no CI
+- [x] Testes do backend no CI (`dotnet test`, projeto `tests/ProjetoRpg.Testes`)
+- [ ] Lint e formatação (ESLint/Prettier no frontend, `dotnet format` no backend)
 - [x] Aplicar a [identidade visual](03-identidade-visual.md) no frontend (tokens no `@theme`, fontes, tema claro e escuro)
 
 ## 2. Contas e login
@@ -61,9 +62,11 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 
 ## 6. Fichas
 
+- [x] Formato do modelo de ficha, com validação e testes ([06-modelo-de-ficha.md](06-modelo-de-ficha.md))
+- [x] Equipe do mestre em dois níveis: co-mestre e assistente (fichas e tabuleiro)
 - [ ] Refazer a ficha do zero (a atual era um teste), montada a partir do modelo (`ModeloFicha`)
 - [ ] Ligar a ficha a uma mesa e a um participante
-- [ ] Template padrão 5e com o conteúdo do SRD 5.1 (CC-BY-4.0, com atribuição)
+- [x] Template padrão 5e com o conteúdo do SRD 5.1 (CC-BY-4.0, com atribuição na página `/creditos`)
 - [ ] Ficha simplificada para pets e NPCs do jogador, com modelo próprio em cada template
 - [ ] Mestre cria fichas e atribui uma ou mais a cada jogador
 - [ ] Fórmula de rolagem por atributo cadastrada no template, com o resultado enviado ao chat
@@ -75,7 +78,8 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [ ] Listar as fichas da mesa
 - [ ] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele
 - [ ] Mestre define, por ficha, se os outros jogadores podem ver aquela ficha
-- [ ] Base do SignalR (hub da mesa, grupo por mesa) e ficha sincronizada em tempo real, enviando só os campos alterados
+- [x] Base do SignalR: hub da mesa, grupo por mesa; a página da mesa se atualiza sozinha
+- [ ] Ficha sincronizada em tempo real, enviando só os campos alterados
 - [ ] Na ficha nova: valor máximo editável nas barras, modos "ver" / "editar", favoritar perícias, tabela de combate editável
 - [ ] Layout responsivo da ficha (hoje tem largura fixa de 940px)
 

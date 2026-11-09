@@ -43,7 +43,7 @@ Modelo de ficha: diz quais campos a ficha tem e como cada atributo é rolado. Po
 | `Id` | Guid | |
 | `Nome` | texto | |
 | `Descricao` | texto? | |
-| `ModeloFicha` | jsonb | Atributos, perícias, barras, condições, colunas de combate e a **fórmula de rolagem** de cada atributo (ex.: `1d20 + mod(forca)`) |
+| `ModeloFicha` | jsonb | Atributos, perícias, barras, condições, colunas de combate e a **fórmula de rolagem** de cada atributo (ex.: `1d20 + mod(forca)`). Formato em [06-modelo-de-ficha.md](06-modelo-de-ficha.md) |
 | `ModeloFichaSimplificada` | jsonb | Os campos da ficha simplificada (pets e NPCs do jogador) desse template |
 | `CriadorId` | Guid? → Usuario | `null` = template padrão do site; preenchido = template custom, visível só para o criador |
 
@@ -76,7 +76,7 @@ Liga usuário e mesa. Chave composta (`MesaId`, `UsuarioId`).
 | --- | --- | --- |
 | `MesaId` | Guid → Mesa | |
 | `UsuarioId` | Guid → Usuario | |
-| `Papel` | enum | `Dono` (o mestre, exatamente um, não transferível), `Ajudante`, `Jogador` ou `Espectador` (papel de quem entra) |
+| `Papel` | enum | `Dono` (o mestre, exatamente um, não transferível), `CoMestre`, `Assistente`, `Jogador` ou `Espectador` (papel de quem entra) |
 | `EntrouEm` | data | |
 
 O mestre é o participante com papel `Dono` (não há `MestreId` na mesa, para não duplicar a informação).
@@ -176,14 +176,14 @@ Um por mesa (1:1) por enquanto.
 | Ver mesa privada | Só participantes; para os outros a API responde 404 |
 | Entrar em mesa pública | Qualquer usuário logado, como espectador, se a entrada não estiver bloqueada e a mesa estiver ativa |
 | Entrar em mesa privada | Quem tem o código de convite, nas mesmas condições |
-| Editar dados da mesa, bloquear entrada, gerar novo código, mudar papel entre espectador e jogador, remover jogador ou espectador | Dono ou ajudante |
-| Nomear ou remover ajudante, encerrar, reabrir ou excluir a mesa, alterar o modelo da ficha da mesa | Dono |
+| Editar dados da mesa, bloquear entrada, gerar novo código, encerrar e reabrir, alterar o modelo da ficha da mesa, mudar papel entre espectador e jogador, remover jogador ou espectador | Dono ou co-mestre |
+| Nomear, trocar ou remover co-mestres e assistentes; excluir a mesa | Dono |
 | Sair da mesa | Qualquer participante, menos o dono |
 | Criar e editar template custom | Qualquer usuário logado, na própria área de templates |
-| Criar ficha, atribuir ficha a jogador | Dono ou ajudante |
+| Criar ficha, atribuir ficha a jogador, cuidar do tabuleiro | Dono, co-mestre ou assistente |
 | Ver ficha | Mestre, ajudante e o jogador da ficha; os outros jogadores só se `VisivelParaJogadores` estiver ligado |
 | Editar e salvar ficha | Jogador a quem ela foi atribuída, ou mestre |
-| Mudar a visibilidade da ficha para os outros jogadores | Dono ou ajudante |
+| Mudar a visibilidade da ficha para os outros jogadores | Dono, co-mestre ou assistente |
 | Salvar ficha na biblioteca; propor ficha da biblioteca para uma mesa | Jogador a quem ela foi atribuída / dono da cópia |
 | Aceitar ou recusar proposta de ficha | Mestre |
 | Ver backups de uma ficha | Mestre e o jogador da ficha |

@@ -49,7 +49,8 @@ Todo erro sai como **Problem Details** (RFC 9457, `application/problem+json`), o
 
 ## Tempo real (SignalR)
 
-- Um hub em `/hubs/mesa`, com cookie de login. O cliente chama `EntrarNaMesa(mesaId)`; o servidor confere se é participante e põe a conexão no grupo da mesa.
+- Um hub em `/hubs/mesa`, com cookie de login. O cliente chama `EntrarNaMesa(mesaId)`; o servidor confere se a mesa é pública ou se a pessoa participa e põe a conexão no grupo da mesa (`SairDaMesa` tira).
+- **Pronto hoje:** `MesaAtualizada(mesaId)` e `MesaExcluida(mesaId)`. Levam só o id; cada cliente busca de novo o `GET /mesas/{id}`, porque o que cada um vê depende do papel (ex.: código de convite). Evento que carregue dados (como `FichaAtualizada`) precisa ir só para quem pode ver aqueles dados.
 - **CRUD fica no REST.** Pelo hub vão só as ações de jogo de alta frequência: `EnviarMensagem`, `Rolar`, `MoverToken`.
 - Eventos do servidor para o grupo, no passado: `MensagemRecebida`, `TokenMovido`, `FichaAtualizada`, `ParticipanteEntrou`, `ParticipanteSaiu`, `PresencaAlterada`.
 - Mudança feita pelo REST que outros precisam ver (ex.: ficha salva) também emite o evento no grupo.
