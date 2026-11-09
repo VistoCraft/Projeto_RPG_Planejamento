@@ -64,24 +64,24 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 
 - [x] Formato do modelo de ficha, com validação e testes ([06-modelo-de-ficha.md](06-modelo-de-ficha.md))
 - [x] Equipe do mestre em dois níveis: co-mestre e assistente (fichas e tabuleiro)
-- [ ] Refazer a ficha do zero (a atual era um teste), montada a partir do modelo (`ModeloFicha`)
-- [ ] Ligar a ficha a uma mesa e a um participante
+- [x] Refazer a ficha do zero (a atual era um teste), montada a partir do modelo (`ModeloFicha`), em `/mesas/[id]/fichas/[fichaId]`
+- [x] Ligar a ficha a uma mesa e a um participante
 - [x] Template padrão 5e com o conteúdo do SRD 5.1 (CC-BY-4.0, com atribuição na página `/creditos`)
 - [ ] Ficha simplificada para pets e NPCs do jogador, com modelo próprio em cada template
-- [ ] Mestre cria fichas e atribui uma ou mais a cada jogador
+- [x] Mestre cria fichas e atribui uma ou mais a cada jogador
 - [ ] Fórmula de rolagem por atributo cadastrada no template, com o resultado enviado ao chat
 - [ ] Biblioteca do jogador: salvar cópia da ficha (manual e automático ao excluir a mesa)
 - [ ] Jogador propõe ficha da biblioteca para uma mesa; mestre aceita ou recusa
 - [ ] Mestre altera o modelo da ficha da mesa, com backup das fichas e conversão de campos antigos para novos
 - [ ] Área de templates do usuário, com editor de template custom
-- [ ] Salvar a ficha no backend no lugar do `localStorage`
-- [ ] Listar as fichas da mesa
-- [ ] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele
-- [ ] Mestre define, por ficha, se os outros jogadores podem ver aquela ficha
+- [x] Salvar a ficha no backend no lugar do `localStorage`
+- [x] Listar as fichas da mesa
+- [x] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele
+- [x] Mestre define, por ficha, se os outros jogadores podem ver aquela ficha
 - [x] Base do SignalR: hub da mesa, grupo por mesa; a página da mesa se atualiza sozinha
-- [ ] Ficha sincronizada em tempo real, enviando só os campos alterados
-- [ ] Na ficha nova: valor máximo editável nas barras, modos "ver" / "editar", favoritar perícias, tabela de combate editável
-- [ ] Layout responsivo da ficha (hoje tem largura fixa de 940px)
+- [x] Ficha sincronizada em tempo real, enviando só os campos alterados
+- [x] Na ficha nova: valor máximo editável nas barras, modos "ver" / "editar", favoritar perícias, tabela de combate editável
+- [x] Layout responsivo da ficha (a ficha nova ocupa a largura toda)
 
 ## 7. Tabuleiro
 

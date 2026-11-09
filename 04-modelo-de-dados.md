@@ -100,6 +100,13 @@ O mestre é o participante com papel `Dono` (não há `MestreId` na mesa, para n
 - **Só o mestre cria fichas.** Ele atribui uma ou mais a um jogador, que pode editar e salvar as suas. Um jogador pode ter várias fichas na mesma mesa.
 - **Biblioteca:** salvar cria uma cópia independente com `MesaId = null`. Acontece pelo botão do jogador e automaticamente para todas as fichas atribuídas quando a mesa é excluída.
 
+**Implementado na 4.3** (`Fichas/` no backend):
+
+- Ficha nova: dados montados a partir do modelo da mesa (`ModeloFicha` ou `ModeloFichaSimplificada`, conforme o tipo): detalhes vazios (o `nome` recebe o nome do personagem), atributos no padrão, perícias não treinadas, barras cheias, sem condições e sem ataques.
+- Só quem tem papel **Jogador** recebe ficha. Espectadores veem só as fichas marcadas como visíveis, como os outros jogadores.
+- Quando o jogador sai ou é removido da mesa, as fichas dele continuam na mesa, sem jogador (o mestre pode entregar a outro).
+- Ao excluir a mesa, as fichas com jogador vão para a biblioteca (`MesaId = null`) ligadas ao template "(modelo da mesa)" criado na exclusão; as fichas sem jogador (NPCs do mestre) são apagadas junto.
+
 ### FichaBackup
 
 Versão antiga de uma ficha, guardada antes de uma conversão.

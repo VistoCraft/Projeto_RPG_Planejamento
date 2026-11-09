@@ -82,3 +82,10 @@ Valores de uma ficha (`Ficha.Dados`), no formato do modelo da mesa:
 ## Edição simultânea
 
 Vale a última gravação de cada campo. O cliente envia só os campos alterados, agrupados a cada ~400 ms (`PATCH /mesas/{id}/fichas/{fichaId}` com `{ "campos": { "atributos.forca": 9 } }`), e o servidor emite `FichaAtualizada` pelo SignalR para quem pode ver a ficha. Quem recebe aplica os campos, menos o que estiver digitando.
+
+**Implementado na 4.4:**
+
+- O servidor valida cada caminho contra o modelo (`Fichas/ValidacaoCamposFicha.cs`): `detalhes.{id}`, `atributos.{id}`, `pericias.{id}.treinada|favorita|valor`, `barras.{id}.atual|maximo`, `condicoes` (lista inteira) e `combate` (tabela inteira, até 50 linhas). No máximo 50 campos por envio; texto até 200 caracteres.
+- Cada campo é gravado com `jsonb_set` direto no banco, dentro de uma transação. Duas pessoas mexendo em campos diferentes ao mesmo tempo não apagam a alteração uma da outra.
+- No frontend, o campo editado localmente fica protegido por 1,5 s contra valores que chegam pelo tempo real.
+- A ficha mostra o resultado das fórmulas sem rolar (`src/dominio/formula.ts`): dados somados e constante calculada, como `1d20 + 5`. Multiplicar ou dividir dados não é suportado na exibição; nesse caso aparece "—". A rolagem de verdade entra com o chat.
