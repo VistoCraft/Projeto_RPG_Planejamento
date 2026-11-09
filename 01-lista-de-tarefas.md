@@ -40,7 +40,7 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [x] Entrar numa mesa (direto, se pública, ou por código), sempre como espectador
 - [x] Sair de uma mesa
 - [x] Mestre: bloquear a entrada, gerar novo código, encerrar, reabrir e excluir (com confirmação)
-- [ ] Mestre: editar nome, descrição e visibilidade pela tela (a API já aceita)
+- [x] Mestre e ajudante: editar nome, descrição e visibilidade pela tela
 - [x] Mestre e ajudante: mudar papel (espectador, jogador, ajudante) e remover participante
 
 ## 4. Mesa
