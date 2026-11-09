@@ -4,7 +4,7 @@ Contrato entre o `Projeto_RPG` (frontend) e o `Projeto_RPG_Backend`.
 
 ## REST
 
-- JSON com propriedades em `camelCase` (padrão do ASP.NET). Datas em ISO 8601 UTC (`2026-11-09T18:00:00Z`). IDs são `Guid` em texto.
+- JSON com propriedades em `camelCase` (padrão do ASP.NET). Enums viajam como texto em `camelCase` (`"publica"`, `"espectador"`). Datas em ISO 8601 UTC (`2026-11-09T18:00:00Z`). IDs são `Guid` em texto.
 - Rotas em português, no plural e em `kebab-case`, aninhadas pela mesa quando o recurso pertence a ela:
 
 | Recurso | Rotas |
@@ -12,9 +12,9 @@ Contrato entre o `Projeto_RPG` (frontend) e o `Projeto_RPG_Backend`.
 | Login (Identity) | `/auth/*` (nomes em inglês, vêm do Identity) |
 | Cadastro e perfil | `POST /auth/cadastro` (e-mail, senha e perfil, no lugar do `/auth/register`), `GET/PUT /perfil`, `POST /auth/sair` |
 | Templates | `GET /templates` (padrão + os do usuário), `POST /templates`, `GET/PUT/DELETE /templates/{id}` |
-| Mesas | `GET /mesas`, `POST /mesas`, `GET/PUT/DELETE /mesas/{id}` |
+| Mesas | `GET /mesas` (sem login: só públicas), `POST /mesas`, `GET/PUT/DELETE /mesas/{id}`, `POST /mesas/{id}/encerrar`, `.../reabrir`, `.../codigo` |
 | Entrar e sair | `POST /mesas/{id}/entrar`, `POST /mesas/entrar-com-codigo`, `POST /mesas/{id}/sair` |
-| Participantes | `GET /mesas/{id}/participantes`, `DELETE /mesas/{id}/participantes/{usuarioId}` |
+| Participantes | `PUT /mesas/{id}/participantes/{usuarioId}` (papel), `DELETE /mesas/{id}/participantes/{usuarioId}` (os participantes vêm no `GET /mesas/{id}`) |
 | Modelo da ficha da mesa | `GET /mesas/{id}/modelo-ficha`, `PUT /mesas/{id}/modelo-ficha` (novo modelo + conversão de campos) |
 | Fichas | `GET/POST /mesas/{id}/fichas`, `GET/PUT/DELETE /mesas/{id}/fichas/{fichaId}`, `GET /mesas/{id}/fichas/{fichaId}/backups` |
 | Biblioteca | `GET /biblioteca/fichas?templateId=`, `POST /mesas/{id}/fichas/{fichaId}/salvar` |

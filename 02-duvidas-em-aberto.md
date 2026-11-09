@@ -23,6 +23,11 @@ Quando uma dúvida for respondida, escreva a resposta e a data embaixo dela e at
 - **Mesas públicas ou privadas:** qualquer um vê a lista de mesas, ou só as mesas em que participa?
   - **Resposta (2026-11-09):** o mestre escolhe. Mesa pública aparece no hub para todos e qualquer usuário logado entra; mesa privada só aparece para os participantes e se entra pelo código de convite.
 - **Limite de jogadores** por mesa?
+  - **Resposta (2026-11-09):** sem limite; o mestre pode bloquear a entrada de novas pessoas.
+- **Entrada e papéis na mesa:** como se entra e quem manda?
+  - **Resposta (2026-11-09):** entra-se direto (mesa pública) ou por código, sempre como espectador; o mestre promove a jogador. O mestre pode dar permissões a ajudantes, mas não passa a posse da mesa.
+  - **Resposta (2026-11-09):** excluir a mesa pede confirmação e apaga tudo, menos as fichas dos jogadores (vão para a biblioteca de cada um) e o modelo de ficha (vai para os templates do mestre). Mesa encerrada fica só para leitura; o mestre pode reabrir ou excluir.
+  - **Ainda em aberto:** o que exatamente o ajudante pode fazer (hoje: gerenciar entrada, código, jogadores e espectadores; não encerra, não exclui, não nomeia ajudantes)?
 - **Rolagens:** o resultado é público para a mesa toda? O mestre pode rolar escondido?
 - **Tabuleiro:** é obrigatório em toda mesa ou opcional?
 - **Fichas fora de mesa:** um jogador pode ter uma ficha sem estar numa mesa?

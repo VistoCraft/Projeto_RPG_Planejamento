@@ -63,8 +63,8 @@ Modelo de ficha: diz quais campos a ficha tem e como cada atributo é rolado. Po
 | `ModeloFicha`, `ModeloFichaSimplificada` | jsonb | Cópias dos modelos do template, feitas na criação da mesa; o mestre pode alterar sem mexer no template |
 | `VersaoModelo` | int | Sobe a cada alteração do `ModeloFicha` da mesa |
 | `Visibilidade` | enum | `Publica` ou `Privada` |
-| `Status` | enum | `Aberta`, `EmSessao` ou `Encerrada` |
-| `LimiteJogadores` | int? | `null` = sem limite; não conta o mestre |
+| `Status` | enum | `Ativa` ou `Encerrada` (encerrada = só leitura; o dono pode reabrir) |
+| `EntradaBloqueada` | bool | O mestre ou ajudante impede a entrada de novas pessoas (direta ou por código). Não há limite de jogadores |
 | `CodigoConvite` | texto | 8 caracteres, único, pode ser gerado de novo pelo mestre |
 | `CriadaEm` | data | |
 
@@ -76,10 +76,10 @@ Liga usuário e mesa. Chave composta (`MesaId`, `UsuarioId`).
 | --- | --- | --- |
 | `MesaId` | Guid → Mesa | |
 | `UsuarioId` | Guid → Usuario | |
-| `Papel` | enum | `Mestre` ou `Jogador`; uma mesa tem exatamente um mestre |
+| `Papel` | enum | `Dono` (o mestre, exatamente um, não transferível), `Ajudante`, `Jogador` ou `Espectador` (papel de quem entra) |
 | `EntrouEm` | data | |
 
-O mestre é o participante com papel `Mestre` (não há `MestreId` na mesa, para não duplicar a informação).
+O mestre é o participante com papel `Dono` (não há `MestreId` na mesa, para não duplicar a informação).
 
 ### Ficha
 
@@ -171,13 +171,15 @@ Um por mesa (1:1) por enquanto.
 
 | Ação | Quem pode |
 | --- | --- |
-| Ver mesa pública na lista | Qualquer usuário logado |
+| Ver mesa pública na lista | Qualquer pessoa, até visitante; abrir a mesa pede login |
 | Ver mesa privada | Só participantes; para os outros a API responde 404 |
-| Entrar em mesa pública | Qualquer usuário logado, se houver vaga |
-| Entrar em mesa privada | Quem tem o código de convite, se houver vaga |
-| Editar, encerrar ou excluir mesa; alterar o modelo da ficha da mesa; remover jogador; gerar novo código | Mestre |
+| Entrar em mesa pública | Qualquer usuário logado, como espectador, se a entrada não estiver bloqueada e a mesa estiver ativa |
+| Entrar em mesa privada | Quem tem o código de convite, nas mesmas condições |
+| Editar dados da mesa, bloquear entrada, gerar novo código, mudar papel entre espectador e jogador, remover jogador ou espectador | Dono ou ajudante |
+| Nomear ou remover ajudante, encerrar, reabrir ou excluir a mesa, alterar o modelo da ficha da mesa | Dono |
+| Sair da mesa | Qualquer participante, menos o dono |
 | Criar e editar template custom | Qualquer usuário logado, na própria área de templates |
-| Criar ficha, atribuir ficha a jogador | Mestre |
+| Criar ficha, atribuir ficha a jogador | Dono ou ajudante |
 | Editar e salvar ficha | Jogador a quem ela foi atribuída, ou mestre |
 | Salvar ficha na biblioteca; propor ficha da biblioteca para uma mesa | Jogador a quem ela foi atribuída / dono da cópia |
 | Aceitar ou recusar proposta de ficha | Mestre |

@@ -33,20 +33,22 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [x] Rota do hub no frontend (hub em `/`, ficha em `/ficha`)
 - [x] Home do produto em `/`; o hub vai para `/mesas`
 - [x] Hub aberto a visitantes, com aviso para criar conta
-- [ ] API: listar mesas
-- [ ] Listagem de mesas com nome, mestre, sistema, número de jogadores e status
-- [ ] Busca e filtro de mesas
-- [ ] Criar mesa (nome, sistema, descrição, limite de jogadores)
-- [ ] Entrar numa mesa (convite por link ou código)
-- [ ] Sair de uma mesa
-- [ ] Mestre: editar, fechar e excluir a mesa
-- [ ] Mestre: remover jogador
+- [x] API: listar mesas (públicas para visitantes; públicas e as minhas para logados)
+- [x] Listagem de mesas com nome, mestre, template, jogadores, espectadores e situação
+- [x] Busca e filtro de mesas (nome, situação, só as minhas)
+- [x] Criar mesa (nome, descrição, template, visibilidade)
+- [x] Entrar numa mesa (direto, se pública, ou por código), sempre como espectador
+- [x] Sair de uma mesa
+- [x] Mestre: bloquear a entrada, gerar novo código, encerrar, reabrir e excluir (com confirmação)
+- [ ] Mestre: editar nome, descrição e visibilidade pela tela (a API já aceita)
+- [x] Mestre e ajudante: mudar papel (espectador, jogador, ajudante) e remover participante
 
 ## 4. Mesa
 
-- [ ] Rota da mesa (`/mesas/[id]`) com layout para chat, fichas e tabuleiro
-- [ ] Mostrar os participantes e quem está online
-- [ ] Permissões por papel (mestre e jogador)
+- [x] Rota da mesa (`/mesas/[id]`) com layout para chat, fichas e tabuleiro (áreas ainda vazias)
+- [x] Mostrar os participantes
+- [ ] Mostrar quem está online (com o SignalR)
+- [x] Permissões por papel (dono, ajudante, jogador, espectador)
 
 ## 5. Chat
 
