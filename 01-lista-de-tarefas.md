@@ -70,10 +70,10 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [ ] Ficha simplificada para pets e NPCs do jogador, com modelo próprio em cada template
 - [x] Mestre cria fichas e atribui uma ou mais a cada jogador
 - [ ] Fórmula de rolagem por atributo cadastrada no template, com o resultado enviado ao chat
-- [ ] Biblioteca do jogador: salvar cópia da ficha (manual e automático ao excluir a mesa)
-- [ ] Jogador propõe ficha da biblioteca para uma mesa; mestre aceita ou recusa
+- [x] Biblioteca do jogador: salvar cópia da ficha (manual e automático ao excluir a mesa), em `/biblioteca`
+- [x] Jogador propõe ficha da biblioteca para uma mesa; mestre aceita ou recusa
 - [ ] Mestre altera o modelo da ficha da mesa, com backup das fichas e conversão de campos antigos para novos
-- [ ] Área de templates do usuário, com editor de template custom
+- [x] Área de templates do usuário, com editor de template custom (`/templates`)
 - [x] Salvar a ficha no backend no lugar do `localStorage`
 - [x] Listar as fichas da mesa
 - [x] Mestre vê e edita todas as fichas; jogador edita só as atribuídas a ele

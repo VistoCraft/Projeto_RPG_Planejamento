@@ -52,6 +52,8 @@ Modelo de ficha: diz quais campos a ficha tem e como cada atributo é rolado. Po
 - Um template **nunca é alterado por uma mesa**.
 - Depois do lançamento: compartilhar templates prontos numa aba do hub (campo de visibilidade no template).
 
+**Implementado na 4.6:** cada usuário cria até 50 templates (`/templates`). O backend valida os dois modelos com as mesmas regras do `06-modelo-de-ficha.md` e regrava o JSON sem campos desconhecidos. Editar um template não muda as mesas já criadas com ele (cada mesa tem a sua cópia). Template em uso por mesa ou ficha não pode ser excluído (`TemplateEmUso`).
+
 ### Mesa
 
 | Campo | Tipo | Observação |
@@ -134,6 +136,8 @@ Pedido de um jogador para levar uma ficha da biblioteca a uma mesa.
 | `CriadaEm` | data | |
 
 Ao aceitar, o mestre gera uma cópia da ficha na mesa, já atribuída ao jogador. Se o modelo da mesa for diferente do modelo em que a ficha foi salva, o mestre usa a mesma conversão de campos de quando altera o modelo.
+
+**Implementado na 4.5:** salvar na biblioteca é só do jogador que recebeu a ficha (`SoODonoSalva`), também com a mesa encerrada. Só quem tem papel Jogador propõe. Uma ficha entra numa mesa se tiver o mesmo `TemplateId` ou se o modelo do template dela for igual ao da mesa (é o caso das fichas guardadas quando uma mesa é excluída, ligadas ao template "(modelo da mesa)"). Não pode haver duas propostas pendentes da mesma ficha na mesma mesa. Aceitar exige que quem propôs ainda seja jogador; a cópia entra oculta dos outros jogadores. O jogador pode cancelar a própria proposta pendente.
 
 **Alterar o modelo da mesa:** o mestre edita o `ModeloFicha` e, no mesmo passo, indica como converter os campos antigos nos novos (ex.: `forca` → `poder`). Para cada ficha da mesa, o backend grava um `FichaBackup`, aplica a conversão nos `Dados` (campo sem destino sai, campo novo entra vazio) e atualiza a `VersaoModelo`.
 

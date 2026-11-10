@@ -33,12 +33,27 @@ Formato do `ModeloFicha` (e do `ModeloFichaSimplificada`, que usa o mesmo format
 | `barras` | `id`, `rotulo`, `cor`, `maximoPadrao` | Cor da paleta: `vida`, `sanidade`, `esforco`, `arcano`, `essencia`, `mare` |
 | `condicoes` | `id`, `rotulo` | Marcadas ou não na ficha |
 | `combate.colunas` | `id`, `rotulo`, `tipo` (`texto`, `numero`, `rolagem`) | Colunas da tabela de ataques |
+| `secoesExtras` | `id`, `rotulo`, `formato` e a lista do formato | Opcional, até 20. Formatos: `campos` (lista `campos`, como os detalhes), `valores` (lista `valores`, como os atributos, com fórmula), `barras`, `marcadores` (lista `marcadores`), `tabela` (lista `colunas`) e `anotacoes` (sem itens). Só a lista do próprio formato pode ter itens. O `id` da seção não pode ser de uma seção padrão |
+| `estilo` | `tema`, `cor`, `fonteTitulo`, `fonteTexto`, `cantos`, `borda`, `titulo`, `densidade`, `secoes` | Opcional, tudo opcional. `tema`: padrao, pergaminho, grimorio, floresta, brasa, gelo. `cor`: `#rrggbb` (destaque). Fontes: medieval, classica, moderna, maquina. `cantos`: retos, suaves, redondos. `borda`: fina, grossa, destaque, nenhuma. `titulo`: simples, linha, faixa. `densidade`: compacta, normal, espacosa. `secoes`: `{ <id da seção>: { cor?, borda?, titulo? } }`, até 40, só seções que existem |
+| `layout` | `linhas: [{ divisao, colunas: [[secao, ...], ...] }]` | Opcional. Até 12 linhas. `divisao`: `uma`, `duas`, `larga-estreita`, `estreita-larga` (2 colunas) ou `tres`; o número de colunas precisa bater. Seções: `detalhes`, `barras`, `atributos`, `condicoes`, `pericias`, `combate` e os ids das `secoesExtras`, cada uma no máximo uma vez |
 
 Regras gerais:
 
 - Todas as seções, menos `versao`, são opcionais.
 - `id`: letras minúsculas, números e `_`, começando com letra, até 32 caracteres, sem parecer um dado (`d6`). É **único no modelo inteiro**, para as fórmulas não ficarem ambíguas.
 - `rotulo`: de 1 a 60 caracteres. Cada lista tem no máximo 100 itens.
+
+### Layout da ficha
+
+Diz onde cada seção aparece. Sem `layout`, vale o padrão: Detalhes numa linha; Status, Atributos e Condições numa coluna larga e Perícias numa estreita; Ataques embaixo. Seções que não estão no layout aparecem no fim, uma embaixo da outra. Na tela, as colunas só ficam lado a lado em telas largas; numa linha em que só uma coluna tem conteúdo, ela ocupa a largura toda.
+
+```json
+"layout": { "linhas": [
+  { "divisao": "duas", "colunas": [["detalhes"], ["pericias"]] },
+  { "divisao": "larga-estreita", "colunas": [["barras", "atributos"], ["condicoes"]] },
+  { "divisao": "uma", "colunas": [["combate"]] }
+] }
+```
 
 ## Fórmulas de rolagem
 
@@ -61,7 +76,7 @@ O analisador (`ModelosFicha/AnalisadorFormula.cs`) só confere a escrita e se os
 
 Modelos em `Projeto_RPG_Backend/src/ProjetoRpg.Api/Templates/Modelos/` (`5e.json` e `5e-simplificado.json`), incorporados à API e usados no seed do template. Só conteúdo do SRD 5.1 (CC-BY-4.0), com a atribuição na descrição do template e na página `/creditos` do site.
 
-- **Completo:** nome, classe, raça, nível, experiência, antecedente, alinhamento, classe de armadura, deslocamento e dados de vida; os 6 atributos (1 a 30, padrão 10); iniciativa, 6 salvaguardas e 18 perícias, cada uma com `1d20 + mod(atributo) + treinada(id) * (2 + piso((nivel - 1) / 4))`; PV e PV temporários; 15 condições; tabela de ataques (arma, rolagem de ataque, dano, tipo de dano, alcance).
+- **Completo** (todos os campos da primeira página da ficha de papel do 5e, só com termos do SRD): nome do personagem, classe, nível, antecedente, nome do jogador, raça, alinhamento, experiência e dado de vida; os 6 atributos (1 a 30, padrão 10); iniciativa, 6 salvaguardas, 18 perícias e a Sabedoria passiva (Percepção), com `1d20 + mod(atributo) + treinada(id) * bonus_proficiencia` (a passiva é `10 + mod(sabedoria) + treinada(percepcao) * bonus_proficiencia`); PV, PV temporários e dados de vida restantes; 15 condições; tabela de ataques. Seções novas: Combate (classe de armadura, deslocamento e bônus de proficiência, de 2 a 6, escrito pelo jogador como na ficha de papel), Testes contra a morte (3 sucessos e 3 falhas), Traços de personalidade, Ideais, Vínculos, Defeitos, Outras proficiências e idiomas, Moedas (PC, PP, PE, PO, PL), Equipamento e Características e talentos. Layout em 4 linhas: Detalhes; 3 colunas (atributos e combate · status, testes contra a morte e condições · traços, ideais, vínculos e defeitos); perícias ao lado de ataques e características; proficiências ao lado de moedas e equipamento.
 - **Simplificado (pets e NPCs):** nome, tipo, nível, CA e deslocamento; os 6 atributos; iniciativa, percepção e furtividade; PV; as mesmas condições e a mesma tabela de ataques.
 
 ## Dados da ficha
@@ -75,9 +90,12 @@ Valores de uma ficha (`Ficha.Dados`), no formato do modelo da mesa:
   "pericias": { "atletismo": { "valor": 0, "treinada": false, "favorita": true } },
   "barras": { "pv": { "atual": 14, "maximo": 18 } },
   "condicoes": ["envenenado"],
-  "combate": [ { "arma": "Cajado", "dano": "1d6" } ]
+  "combate": [ { "arma": "Cajado", "dano": "1d6" } ],
+  "extras": { "moedas": { "ouro": 25 }, "idiomas": ["comum"], "inventario": [ { "item": "Corda", "quantidade": 2 } ], "historia": "..." }
 }
 ```
+
+Valores das seções novas ficam em `extras.<id da seção>`: objeto `{ item: valor }` para campos e valores, `{ item: { atual, maximo } }` para barras, lista de ids para marcadores, lista de linhas para tabela e texto (até 5.000 caracteres) para anotações. No `PATCH`, os caminhos são `extras.<secao>.<item>`, `extras.<secao>.<item>.atual|maximo` e `extras.<secao>` (marcadores, tabela e anotações inteiros). Itens de `valores`, `barras` e campos numéricos das seções novas podem ser usados nas fórmulas.
 
 ## Edição simultânea
 
