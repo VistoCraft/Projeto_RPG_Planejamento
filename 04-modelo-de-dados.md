@@ -141,6 +141,8 @@ Ao aceitar, o mestre gera uma cópia da ficha na mesa, já atribuída ao jogador
 
 **Alterar o modelo da mesa:** o mestre edita o `ModeloFicha` e, no mesmo passo, indica como converter os campos antigos nos novos (ex.: `forca` → `poder`). Para cada ficha da mesa, o backend grava um `FichaBackup`, aplica a conversão nos `Dados` (campo sem destino sai, campo novo entra vazio) e atualiza a `VersaoModelo`.
 
+**Implementado na 4.7 (backend):** a conversão é por campo do modelo novo: `{ "atributos.poder": "atributos.forca" }` diz de onde vem cada campo; sem entrada, vem do campo de mesmo caminho; `null` deixa vazio. Os campos têm tipo (valor, perícia, barra, marcador, coluna de tabela) e só se converte entre o mesmo tipo. Cada valor é validado contra o modelo novo; se não couber, tenta texto ↔ número e, se ainda não couber, fica o padrão. Só ganham backup e conversão as fichas do tipo (completa ou simplificada) cujo modelo mudou; a mesa sobe a `VersaoModelo` uma vez. Quem troca o modelo é o nível Gerente (dono e co-mestre); backups são vistos pela equipe e pelo jogador da ficha.
+
 ### Mensagem
 
 | Campo | Tipo | Observação |

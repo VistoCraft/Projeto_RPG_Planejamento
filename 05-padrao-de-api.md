@@ -15,8 +15,8 @@ Contrato entre o `Projeto_RPG` (frontend) e o `Projeto_RPG_Backend`.
 | Mesas | `GET /mesas` (sem login: só públicas), `POST /mesas`, `GET/PUT/DELETE /mesas/{id}`, `POST /mesas/{id}/encerrar`, `.../reabrir`, `.../codigo` |
 | Entrar e sair | `POST /mesas/{id}/entrar`, `POST /mesas/entrar-com-codigo`, `POST /mesas/{id}/sair` |
 | Participantes | `PUT /mesas/{id}/participantes/{usuarioId}` (papel), `DELETE /mesas/{id}/participantes/{usuarioId}` (os participantes vêm no `GET /mesas/{id}`) |
-| Modelo da ficha da mesa | `GET /mesas/{id}/modelo-ficha`, `PUT /mesas/{id}/modelo-ficha` (novo modelo + conversão de campos) |
-| Fichas | `GET/POST /mesas/{id}/fichas`, `GET/PUT/DELETE /mesas/{id}/fichas/{fichaId}`, `GET /mesas/{id}/fichas/{fichaId}/backups` |
+| Modelo da ficha da mesa | `GET /mesas/{id}/modelo-ficha`, `POST /mesas/{id}/modelo-ficha/previa` (campos atuais e novos, com a origem padrão de cada um), `PUT /mesas/{id}/modelo-ficha` (novo modelo + conversão de campos) |
+| Fichas | `GET/POST /mesas/{id}/fichas`, `GET/PUT/DELETE /mesas/{id}/fichas/{fichaId}`, `GET /mesas/{id}/fichas/{fichaId}/backups` e `/backups/{backupId}` |
 | Templates | `GET /templates`, `GET /templates/{id}` (padrão: aberto a visitantes), `POST /templates`, `PUT/DELETE /templates/{id}` (só os próprios) |
 | Biblioteca | `GET /biblioteca/fichas?templateId=`, `GET/DELETE /biblioteca/fichas/{fichaId}`, `POST /mesas/{id}/fichas/{fichaId}/salvar` |
 | Propostas | `GET/POST /mesas/{id}/propostas`, `POST /mesas/{id}/propostas/{propostaId}/aceitar` e `/recusar`, `DELETE /mesas/{id}/propostas/{propostaId}` |
@@ -52,7 +52,7 @@ Todo erro sai como **Problem Details** (RFC 9457, `application/problem+json`), o
 ## Tempo real (SignalR)
 
 - Um hub em `/hubs/mesa`, com cookie de login. O cliente chama `EntrarNaMesa(mesaId)`; o servidor confere se a mesa é pública ou se a pessoa participa e põe a conexão no grupo da mesa (`SairDaMesa` tira).
-- **Pronto hoje:** `MesaAtualizada(mesaId)`, `MesaExcluida(mesaId)` `FichasAtualizadas(mesaId)`, `PropostasAtualizadas(mesaId)` e `FichaAtualizada({ mesaId, fichaId, campos })` (enviado só aos usuários que podem ver a ficha, com `Clients.Users`). `FichasAtualizadas`: uma ficha foi criada, editada, excluída ou ficou sem jogador; o cliente busca de novo `GET /mesas/{id}/fichas`, que já filtra o que cada um pode ver). Levam só o id; cada cliente busca de novo o `GET /mesas/{id}`, porque o que cada um vê depende do papel (ex.: código de convite). Evento que carregue dados (como `FichaAtualizada`) precisa ir só para quem pode ver aqueles dados.
+- **Pronto hoje:** `MesaAtualizada(mesaId)`, `MesaExcluida(mesaId)` `FichasAtualizadas(mesaId)`, `PropostasAtualizadas(mesaId)`, `ModeloAtualizado(mesaId)` (o modelo da mesa mudou e as fichas foram convertidas; quem está com uma ficha aberta busca de novo) e `FichaAtualizada({ mesaId, fichaId, campos })` (enviado só aos usuários que podem ver a ficha, com `Clients.Users`). `FichasAtualizadas`: uma ficha foi criada, editada, excluída ou ficou sem jogador; o cliente busca de novo `GET /mesas/{id}/fichas`, que já filtra o que cada um pode ver). Levam só o id; cada cliente busca de novo o `GET /mesas/{id}`, porque o que cada um vê depende do papel (ex.: código de convite). Evento que carregue dados (como `FichaAtualizada`) precisa ir só para quem pode ver aqueles dados.
 - **CRUD fica no REST.** Pelo hub vão só as ações de jogo de alta frequência: `EnviarMensagem`, `Rolar`, `MoverToken`.
 - Eventos do servidor para o grupo, no passado: `MensagemRecebida`, `TokenMovido`, `FichaAtualizada`, `ParticipanteEntrou`, `ParticipanteSaiu`, `PresencaAlterada`.
 - Mudança feita pelo REST que outros precisam ver (ex.: ficha salva) também emite o evento no grupo.
