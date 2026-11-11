@@ -72,7 +72,8 @@ Marque `[x]` quando terminar. A ordem das seções é a ordem sugerida de execu�
 - [ ] Fórmula de rolagem por atributo cadastrada no template, com o resultado enviado ao chat
 - [x] Biblioteca do jogador: salvar cópia da ficha (manual e automático ao excluir a mesa), em `/biblioteca`
 - [x] Jogador propõe ficha da biblioteca para uma mesa; mestre aceita ou recusa
-- [ ] Mestre altera o modelo da ficha da mesa, com backup das fichas e conversão de campos antigos para novos
+- [x] Mestre altera o modelo da ficha da mesa, com backup das fichas e conversão de campos antigos para novos (`/mesas/[id]/modelo`)
+- [ ] Cópia na biblioteca guarda o modelo da mesa, e a proposta de ficha com outro modelo usa a mesma conversão
 - [x] Área de templates do usuário, com editor de template custom (`/templates`)
 - [x] Salvar a ficha no backend no lugar do `localStorage`
 - [x] Listar as fichas da mesa
